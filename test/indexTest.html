@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="九龍塘官立小學 — 校園生活與學生成就" />
+    <title>九龍塘官立小學 | Alliance Primary School Kowloon Tong</title>
+    <link rel="stylesheet" href="styleTest.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" id="home" aria-label="學校主頁">
+        <div class="hero-next">
+          <div class="hero-orbit" aria-hidden="true">
+            <img src="hero-volleyball.jpg" alt="" />
+          </div>
+
+          <div class="hero-copy">
+            <h1 id="hero-title">我們熱愛運動</h1>
+            <p id="hero-subtitle">We love sports</p>
+            <div class="hero-dots" role="group" aria-label="主頁橫幅">
+              <button
+                type="button"
+                aria-label="橫幅 1"
+                aria-current="false"
+              ></button>
+              <button
+                type="button"
+                aria-label="橫幅 2"
+                aria-current="false"
+              ></button>
+              <button
+                type="button"
+                aria-label="橫幅 3"
+                aria-current="true"
+              ></button>
+              <button
+                type="button"
+                aria-label="橫幅 4"
+                aria-current="false"
+              ></button>
+              <button
+                type="button"
+                aria-label="橫幅 5"
+                aria-current="false"
+              ></button>
+              <button
+                type="button"
+                aria-label="橫幅 6"
+                aria-current="false"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="campus" id="campus" aria-labelledby="campus-title">
+        <div class="campus-inner">
+          <div class="section-heading">
+            <h2 id="campus-title">校園生活</h2>
+            <a class="more-link" href="#achievements">更多</a>
+          </div>
+
+          <div class="news-wrap">
+            <div class="news-list" id="news-list">
+              <article class="news-card">
+                <img
+                  src="assets/news-1.jpg"
+                  alt="學生參加全港小學三項潛能傑出學生選拔"
+                />
+                <h3>全港小學界三項潛能傑出學生選拔2026</h3>
+                <time datetime="2026-09-28">2026年9月28日</time>
+              </article>
+              <article class="news-card">
+                <img src="assets/news-2.jpg" alt="學生參與校園手作活動" />
+                <h3>跨「悅」宣小</h3>
+                <time datetime="2026-08-28">2026年8月28日</time>
+              </article>
+              <article class="news-card">
+                <img src="assets/news-3.jpg" alt="學生參加小學游泳比賽" />
+                <h3>第十八屆宣小水運會</h3>
+                <time datetime="2026-08-27">2026年8月27日</time>
+              </article>
+              <article class="news-card">
+                <img src="assets/news-4.jpg" alt="學生與老師在校園合照" />
+                <h3>高級管樂團勇奪WMC金獎</h3>
+                <time datetime="2026-08-17">2026年8月17日</time>
+              </article>
+            </div>
+            <button
+              class="carousel-arrow prev"
+              type="button"
+              aria-label="上一則校園消息"
+            >
+              ‹
+            </button>
+            <button
+              class="carousel-arrow next"
+              type="button"
+              aria-label="下一則校園消息"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const bannerSlides = [
+        ["我們熱愛學習", "We love learning"],
+        ["我們關愛社群", "We care for our community"],
+        ["我們熱愛運動", "We love sports"],
+        ["我們勇於創新", "We are innovative"],
+        ["我們發揮潛能", "We reach our potential"],
+        ["我們一起成長", "We grow together"],
+      ];
+      const bannerButtons = [...document.querySelectorAll(".hero-dots button")];
+      const title = document.querySelector("#hero-title");
+      const subtitle = document.querySelector("#hero-subtitle");
+
+      bannerButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          title.textContent = bannerSlides[index][0];
+          subtitle.textContent = bannerSlides[index][1];
+          bannerButtons.forEach((dot, dotIndex) => {
+            dot.setAttribute("aria-current", String(index === dotIndex));
+          });
+        });
+      });
+
+      const newsList = document.querySelector("#news-list");
+      document
+        .querySelector(".carousel-arrow.prev")
+        .addEventListener("click", () => {
+          newsList.prepend(newsList.lastElementChild);
+        });
+      document
+        .querySelector(".carousel-arrow.next")
+        .addEventListener("click", () => {
+          newsList.append(newsList.firstElementChild);
+        });
+    </script>
+  </body>
+</html>

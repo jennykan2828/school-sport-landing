@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sports School · 九天天氣預報</title>
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --bg: #f7f7f5;
+      --card: #ffffff;
+      --good: #0d6e4f;
+      --bad: #b33a3a;
+      --muted: #666;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .site-header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 1rem 1.5rem;
+      background: white;
+      border-bottom: 2px solid var(--ink);
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .title {
+      width: 48px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--ink);
+      border-radius: 3px 3px 14px 14px;
+      box-shadow: inset 0 0 0 3px white, inset 0 0 0 4px var(--ink);
+      font-family: Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .brand-copy strong,
+    .brand-copy span { display: block; text-transform: uppercase; }
+    .brand-copy strong { font-size: 16px; }
+    .brand-copy span   { font-size: 12px; color: var(--muted); }
+
+    .main-nav {
+      display: flex;
+      flex: 1;
+      align-items: center;
+    }
+    .main-nav > a:first-child { margin-left: auto; }
+    .to-right { margin-left: auto; }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 15px;
+      white-space: nowrap;
+      padding: 0.25rem 0.4rem;
+    }
+    .main-nav a:not(:last-child)::before {
+      content: "•";
+      margin: 0 10px 0 6px;
+      color: #999;
+    }
+
+    /* Content */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .page-title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .page-title h1 { font-size: 1.75rem; font-weight: 700; }
+    .update-time { font-size: 0.9rem; color: var(--muted); }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .day-card {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 1.25rem 1.35rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .day-date { font-weight: 700; font-size: 1.05rem; }
+    .day-weekday { font-size: 0.85rem; color: var(--muted); margin-top: -0.25rem; }
+    .day-weather { font-size: 0.95rem; }
+    .day-temp { font-size: 1.35rem; font-weight: 700; }
+    .day-psr { font-size: 0.9rem; color: var(--muted); }
+
+    .hiking-badge {
+      margin-top: auto;
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .hiking-badge.good {
+      background: #e6f4ef;
+      color: var(--good);
+      border: 1px solid #b8e0d0;
+    }
+    .hiking-badge.bad {
+      background: #fceeed;
+      color: var(--bad);
+      border: 1px solid #f0c4c4;
+    }
+
+    .error-box {
+      background: #fceeed;
+      color: var(--bad);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .legend {
+      margin-top: 2.5rem;
+      padding: 1rem 1.25rem;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a href="#" class="brand">
+      <span class="title">Sports</span>
+      <span class="brand-copy">
+        <strong>Sports School</strong>
+        <span>Kowloon Tong</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="#">About</a>
+      <a href="#">Campus</a>
+      <a href="#">Achievements</a>
+      <a href="#">Admissions</a>
+      <a href="#">Contact</a>
+      <a href="#" class="to-right">Login</a>
+      <a href="#">Sign Up</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="page-title">
+      <h1>Choice game</h1>
+
+    {% if choicegame.error %}
+      <p class="error">{{ choicegame.error }}</p>
+    {% elif choicegame.questions %}
+      {% for q in choicegame.questions %}
+        <div class="question-block">
+          <h3>{{ loop.index }}. {{ q.question | safe }}</h3>
+          <ul>
+            {% for choice in q.choices %}
+              <li>{{ choice }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No questions available.</p>
+    {% endif %}
+
+    
+  </main>
+
+</body>
+</html>
