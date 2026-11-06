@@ -23,14 +23,16 @@
 # height = float(input("Enter your height in meters: "))
 
 
-
-
 # bmi, status = bmi(weight, height)
 # print(f"Your BMI is {bmi} and your status is {status}.")
 # foot = ['rice', 'orange', 'apple', 'banana', 'pear', 'strawberry', 'mango', 'pineapple', 'grape', 'kiwi']
 # foot_set=set(foot)
 # print(foot_set)
 
+import datetime as dt
 
-
-
+now = dt.datetime.now()
+yesterday = dt.datetime(2026, 11, 5)
+print(now.strftime('Year: strftime("%Y")'))
+print(now.strftime('Month: strftime("%m")'))
+print(now.strftime('Day: strftime("%d")'))
