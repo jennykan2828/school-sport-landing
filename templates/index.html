@@ -39,8 +39,16 @@
       </div>
       <div class="question-block">
         {% for q in choicegame.questions %}
-
         <div class="day-card">
+          <div class="card-badge">Top Brew</div>
+          <div class="card-image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80"
+              alt="Midnight Elixir Potion"
+              class="card-image"
+            />
+            <!-- <div class="glow-effect"></div> -->
+          </div>
           <h3>{{ loop.index }}. {{ q.question | safe }}</h3>
           <ul>
             {% for choice in q.choices %}

@@ -203,6 +203,15 @@ def main():
     direction = input("Arrival or Departure? (a/d) [default = d]: ").strip().lower()
     is_arrival = direction in ("a", "arrival", "arr")
 
+    lang_input = input("Language (en / tc / sc) [default = en]: ").strip().lower()
+
+    if lang_input in ("tc", "zh_hk", "zh-hk"):
+        lang = "zh_HK"
+    elif lang_input in ("sc", "zh_cn", "zh-cn"):
+        lang = "zh_CN"
+    else:
+        lang = "en"
+
     keyword = input("City or airport code (e.g. Tokyo, NRT, Seoul, TPE): ").strip()
     if not keyword:
         print("❌ Please enter a city or code.")
@@ -216,7 +225,7 @@ def main():
     print("\n⏳ Searching...\n")
 
     # --- Fetch & Filter ---
-    flights = get_hko_flights(target_date, arrival=is_arrival, cargo=False)
+    flights = get_hko_flights(target_date, arrival=is_arrival, cargo=False, lang=lang)
     matched = filter_flights(flights, codes, is_arrival)
 
     # --- Display ---
