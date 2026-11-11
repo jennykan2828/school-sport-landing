@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
@@ -37,31 +37,43 @@
         <p class="error">{{ choicegame.error }}</p>
         {% elif choicegame.questions %}
       </div>
-      <div class="question-block">
-        {% for q in choicegame.questions %}
-        <div class="day-card">
-          <div class="card-badge">Top Brew</div>
-          <div class="card-image-wrapper">
-            <img
-              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80"
-              alt="Midnight Elixir Potion"
-              class="card-image"
-            />
-            <!-- <div class="glow-effect"></div> -->
-          </div>
-          <h3>{{ loop.index }}. {{ q.question | safe }}</h3>
-          <ul>
-            {% for choice in q.choices %}
-            <li>{{ choice }}</li>
-            {% endfor %}
-          </ul>
-        </div>
 
-        {% endfor %}
+      <div class="slider-wrapper">
+        <!-- Left Arrow -->
+        <button class="nav-arrow prev" aria-label="Previous">‹</button>
+        <div class="question-block">
+          {% for q in choicegame.questions %}
+          <div class="day-card {% if loop.first %}active{% endif %}">
+            <div class="card-badge">Top Brew</div>
+            <div class="card-image-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=600&q=80"
+                alt="Midnight Elixir Potion"
+                class="card-image"
+              />
+              <div class="glow-effect"></div>
+            </div>
+            <div class="card-content">
+              <h3>{{ loop.index }}. {{ q.question | safe }}</h3>
+              <ul>
+                {% for choice in q.choices %}
+                <li>{{ choice }}</li>
+                {% endfor %}
+              </ul>
+              <button class="next-btn">Next →</button>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+        <!-- Right Arrow -->
+        <button class="nav-arrow next" aria-label="Next">›</button>
       </div>
+
       {% else %}
       <p>No questions available.</p>
       {% endif %}
     </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
 </html>
