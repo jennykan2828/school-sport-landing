@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+:root{
+    --card-width: 50%;
+    --card-height: 80%;
+    --bg-color: #fff;
+}
+
+@keyframes shake {
+    0%{
+        transform: translateX(50px);
+    }
+    50%{
+        transform: translateX(-50px);
+    }
+    100%{
+        transform: translateX(0) translateY(0px);
+    }
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--bg-color);
+}
+
+.shakeit{
+    animation: shake 0.2s ease 1 normal forwards;
+}
+
+.container-fluid{
+    width: 100vw;
+    height: 100vh;
+}
+
+.pcon{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.project-card{
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 10px;
+    position: absolute;
+    top: 4em;
+    transform-style: preserve-3d;
+    color: grey;
+    display: flex;
+    transform: rotateY(0);
+    transition: all 1s ease-in;
+    box-shadow: 0.063em 0.75em 1.563em rgb(0 0 0 / 78%);
+}
+
+
+.face{
+    width: 100%;
+    height: 100%;   
+    flex-shrink: 0;
+    border-radius: 10px;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.card-rear{
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-rear{
+    background-image: radial-gradient(farthest-side at right top, aqua, var(--bg-color) 80%);
+}
+
+.card-header > .title{
+    text-align: center;
+    font-size: 2em;
+}
+
+.card-body{
+    padding: 2em;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jenny | Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jenny<span>.</span></a>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero with photo -->
+    <section class="hero">
+      <img 
+        src="cat.jpg" 
+        alt="Jenny profile photo" 
+        class="hero-photo"
+        width="280"
+        height="280"
+      >
+      <div class="hero-text">
+        <h1>Jenny Kan</h1>
+        <p class="title">Full-Stack Developer & Travel Enthusiast</p>
+        <p>
+          I build clean web experiences and explore the world. 
+          Passionate about modern frontend, practical backend solutions, 
+          and turning ideas into real projects.
+        </p>
+        <div>
+          <a href="projects.html" class="btn">View Projects</a>
+          <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Introduction</h2>
+      <p style="color: var(--text-muted); margin-bottom: 1rem; max-width: 600px;">
+        A short introduction about me and what I do. Replace the video below with your own.
+      </p>
+      <div class="video-container">
+        <!-- Replace the src with your own YouTube video ID -->
+        <iframe 
+          src="rail.mp4" 
+          title="Introduction Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <span class="skill">HTML & CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Node.js</span>
+        <span class="skill">Python</span>
+        <span class="skill">SQL</span>
+        <span class="skill">Git</span>
+        <span class="skill">Responsive Design</span>
+        <span class="skill">UI/UX Basics</span>
+      </div>
+    </section>
+
+    <!-- Experience highlights -->
+    <section>
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">2023 – Present</div>
+          <h3>Frontend Developer</h3>
+          <div class="company">Freelance / Personal Projects</div>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
+            Building responsive websites and web apps for clients and personal use. 
+            Focus on clean UI, performance, and good user experience.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">2021 – 2023</div>
+          <h3>Junior Web Developer</h3>
+          <div class="company">Local Digital Agency</div>
+          <p style="color: var(--text-muted); font-size: 0.92rem;">
+            Worked on multiple client websites, landing pages, and small web applications 
+            using HTML, CSS, JavaScript and basic backend integration.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick projects teaser -->
+    <section>
+      <h2>Featured Projects</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Travel Guide Website</h3>
+          <p>A multi-page travel site with destinations, deals and destination guides.</p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Personal Portfolio</h3>
+          <p>This site – clean personal CV and project showcase.</p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Modern UI</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Task Manager App</h3>
+          <p>Simple todo / task app with local storage and clean interface.</p>
+          <div class="tags">
+            <span class="tag">JavaScript</span>
+            <span class="tag">LocalStorage</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1.25rem;">
+        <a href="projects.html" style="color: var(--accent); text-decoration: none; font-weight: 600;">
+          See all projects →
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Jenny Kan · Built with care</p>
+  </footer>
+</body>
+</html>

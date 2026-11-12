@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jenny | Contact</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">Jenny<span>.</span></a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Get in Touch</h2>
+      <p style="color: var(--text-muted); margin-bottom: 2rem; max-width: 520px;">
+        Have a question, project idea, or just want to say hi? 
+        Feel free to reach out — I’ll get back to you as soon as I can.
+      </p>
+
+      <div class="contact-grid">
+        <!-- Contact info -->
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="icon">✉️</div>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:Jenny.wong@example.com">Jenny.wong@example.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">📍</div>
+            <div>
+              <strong>Location</strong>
+              <span>Hong Kong</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">💼</div>
+            <div>
+              <strong>LinkedIn</strong>
+              <a href="#" target="_blank" rel="noopener">linkedin.com/in/Jennywong</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon">🐙</div>
+            <div>
+              <strong>GitHub</strong>
+              <a href="#" target="_blank" rel="noopener">github.com/Jennywong</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simple contact form (no backend) -->
+        <form onsubmit="event.preventDefault(); alert('Thanks for your message! (This is a demo form – connect it to a backend or Formspree later.)');">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button type="submit" class="btn" style="align-self: flex-start;">Send Message</button>
+        </form>
+      </div>
+       <!-- Google Map -->
+       <div style="margin-top: 2.5rem;">
+        <h2>Find Me</h2>
+        <p style="color: var(--text-muted); margin-bottom: 0.75rem;">Based in Hong Kong</p>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118107.57968295996!2d114.12005955!3d22.3570299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403e2eda332424f%3A0x6c9f6ced44852b0!2sHong%20Kong!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Hong Kong Map">
+          </iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Jenny Kan · Built with care</p>
+  </footer>
+</body>
+</html>
