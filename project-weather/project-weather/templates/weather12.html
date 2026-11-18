@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+          crossorigin="anonymous">
+
+    <style>
+      html, body { height: 100%; }
+      body { background-color: lightskyblue; }
+    </style>
+
+    <title>weather3</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Weather - Flask</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/weather2">weather2</a></li>
+            <li class="nav-item"><a class="nav-link" href="/weather3">weather3</a></li>
+            <li class="nav-item"><a class="nav-link" href="/weather4">weather4</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section style="background-color: lightskyblue; min-height: 100vh;">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center" style="color: #282828;">
+          <div class="col-md-9 col-lg-7 col-xl-5">
+
+            <!-- Card 1: current conditions -->
+            <div class="card mb-4 gradient-custom" style="border-radius: 25px;">
+              <div class="card-body p-4">
+                <div id="demo1" class="carousel slide" data-bs-ride="carousel">
+                  <ul class="carousel-indicators mb-0">
+                    <li data-bs-target="#demo1" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#demo1" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#demo1" data-bs-slide-to="2"></li>
+                  </ul>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="d-flex justify-content-between mb-4 pb-2">
+                        <div>
+                          <h2 class="display-2"><strong>{{ temperature }}°C</strong></h2>
+                          <p class="text-muted mb-0">Hong Kong</p>
+                          <h5 class="display-19">{{ humidity }}%</h5>
+                        </div>
+                        <div>
+                          <img src="https://www.hko.gov.hk/images/HKOWxIconOutline/pic{{ icon }}.png"
+                               width="150px" alt="weather icon">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: temperature forecast (6 days) -->
+            <div class="card mb-4" style="border-radius: 25px;">
+              <div class="card-body p-4">
+                <div id="demo2" class="carousel slide" data-bs-ride="carousel">
+                  <ul class="carousel-indicators mb-0">
+                    <li data-bs-target="#demo2" data-bs-slide-to="0" class="active"></li>
+                    <li data-bs-target="#demo2" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#demo2" data-bs-slide-to="2"></li>
+                  </ul>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.0.forecastMintemp.value %}
+                          {% set max = dailytempdict.0.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.0.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.0.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.1.forecastMintemp.value %}
+                          {% set max = dailytempdict.1.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.1.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.1.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.2.forecastMintemp.value %}
+                          {% set max = dailytempdict.2.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.2.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.2.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.3.forecastMintemp.value %}
+                          {% set max = dailytempdict.3.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.3.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.3.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.4.forecastMintemp.value %}
+                          {% set max = dailytempdict.4.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.4.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.4.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.5.forecastMintemp.value %}
+                          {% set max = dailytempdict.5.forecastMaxtemp.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}°C</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.5.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.5.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">temp</p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 3: humidity forecast (6 days) -->
+            <div class="card" style="border-radius: 25px;">
+              <div class="card-body p-4">
+                <div id="demo3" class="carousel slide" data-bs-ride="carousel">
+                  <ul class="carousel-indicators mb-0">
+                    <li data-bs-target="#demo3" data-bs-slide-to="0"></li>
+                    <li data-bs-target="#demo3" data-bs-slide-to="1"></li>
+                    <li data-bs-target="#demo3" data-bs-slide-to="2" class="active"></li>
+                  </ul>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <div class="d-flex justify-content-around text-center mb-4 pb-3 pt-2">
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.0.forecastMinrh.value %}
+                          {% set max = dailytempdict.0.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.0.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.0.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.1.forecastMinrh.value %}
+                          {% set max = dailytempdict.1.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.1.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.1.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.2.forecastMinrh.value %}
+                          {% set max = dailytempdict.2.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.2.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.2.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.3.forecastMinrh.value %}
+                          {% set max = dailytempdict.3.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.3.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.3.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.4.forecastMinrh.value %}
+                          {% set max = dailytempdict.4.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.4.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.4.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                        <div class="flex-column">
+                          {% set min = dailytempdict.5.forecastMinrh.value %}
+                          {% set max = dailytempdict.5.forecastMaxrh.value %}
+                          <p class="small"><strong>{{ min }}-{{ max }}%</strong></p>
+                          <i class="fas fa-sun fa-2x mb-3" style="color: #ddd;"></i>
+                          {% set w = resultDict9.weatherForecast.5.week %}
+                          <p class="mb-0"><strong>{{ w[0:3] }}</strong></p>
+                          {% set f = dailytempdict.5.forecastDate %}
+                          <p class="mb-0"><strong>{{ f[6:8] }}</strong></p>
+                          <p class="mb-0 text-muted" style="font-size: .65rem;">humidity</p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap Bundle with Popper (required for carousels) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"></script>
+  </body>
+</html>

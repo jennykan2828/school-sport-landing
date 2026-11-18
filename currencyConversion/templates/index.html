@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Conversion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="converter-card">
+        <form id="convertForm" action="/submit" method="POST">
+            <div class="input-row">
+                
+                <!-- FROM BOX -->
+                <fieldset class="currency-box">
+                    <legend>From</legend>
+                    <div class="box-content">
+                        <input type="number" step="any" name="amount" value="{{ amount or '100' }}" onchange="this.form.submit()" required>
+                        <select name="base_code" class="currency-select" onchange="this.form.submit()">
+                            {% for name, code in targets.items() %}
+                                <option value="{{ code }}" {% if code == base_code %}selected{% endif %}>
+                                    {{ code }} - {{ name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </fieldset>
+
+                <!-- SWAP BUTTON -->
+                <button type="button" class="swap-badge" onclick="swapCurrencies()" title="Swap currencies">⇄</button>
+
+                <!-- TO BOX -->
+                <fieldset class="currency-box">
+                    <legend>To</legend>
+                    <div class="box-content">
+                        <input type="text" class="result-display" value="{{ converted_target or '---' }}" readonly>
+                        <select name="target_code" class="currency-select" onchange="this.form.submit()">
+                            {% for name, code in targets.items() %}
+                                <option value="{{ code }}" {% if code == target_code %}selected{% endif %}>
+                                    {{ code }} - {{ name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </fieldset>
+
+            </div>
+
+            {% if rate_info %}
+                <p class="rate-subtitle">{{ rate_info }}</p>
+            {% endif %}
+        </form>
+
+        {% if error %}
+            <p class="error-msg">{{ error }}</p>
+        {% endif %}
+
+        {% if results %}
+            <div class="results-section">
+                <h3>All Conversions for {{ amount }} {{ base_code }}:</h3>
+                <ul class="results-grid">
+                    {% for currency, converted_value in results.items() %}
+                        <li>
+                            <span>{{ currency }}</span>
+                            <strong>{{ converted_value }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function swapCurrencies() {
+            const form = document.getElementById('convertForm');
+            const baseSelect = form.elements['base_code'];
+            const targetSelect = form.elements['target_code'];
+            
+            const temp = baseSelect.value;
+            baseSelect.value = targetSelect.value;
+            targetSelect.value = temp;
+            
+            form.submit();
+        }
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Conversion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="converter-card">
+        <form id="convertForm" action="/submit" method="POST">
+            <div class="input-row">
+                
+                <fieldset class="currency-box">
+                    <legend>From</legend>
+                    <div class="box-content">
+                        <input type="number" step="any" id="amountInput" name="amount" value="{{ amount or '100' }}" required>
+                        
+                        <div class="select-wrapper">
+                            <img id="baseFlag" class="flag-icon" src="https://flagcdn.com{{ targets[base_code][1] }}.png" alt="{{ base_code }}">
+                            <select id="baseSelect" name="base_code" class="currency-select">
+                                {% for code, (name, flag) in targets.items() %}
+                                    <option value="{{ code }}" data-flag="{{ flag }}" {% if code == base_code %}selected{% endif %}>
+                                        {{ code }} - {{ name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button type="button" class="swap-badge" onclick="swapCurrencies()" title="Swap currencies">⇄</button>
+
+                <fieldset class="currency-box">
+                    <legend>To</legend>
+                    <div class="box-content">
+                        <input type="text" class="result-display" value="{{ converted_target or '---' }}" readonly>
+                        
+                        <div class="select-wrapper">
+                            <img id="targetFlag" class="flag-icon" src="https://flagcdn.com{{ targets[target_code][1] }}.png" alt="{{ target_code }}">
+                            <select id="targetSelect" name="target_code" class="currency-select">
+                                {% for code, (name, flag) in targets.items() %}
+                                    <option value="{{ code }}" data-flag="{{ flag }}" {% if code == target_code %}selected{% endif %}>
+                                        {{ code }} - {{ name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+            </div>
+
+            {% if rate_info %}
+                <p class="rate-subtitle">{{ rate_info }}</p>
+            {% endif %}
+        </form>
+
+        {% if error %}
+            <p class="error-msg">{{ error }}</p>
+        {% endif %}
+
+        {% if results %}
+            <div class="results-section">
+                <h3>All Conversions for {{ amount }} {{ base_code }}:</h3>
+                <ul class="results-grid">
+                    {% for item in results %}
+                        <li>
+                            <span class="result-label">
+                                <img class="flag-icon-sm" src="https://flagcdn.com{{ item.flag }}.png" alt="{{ item.code }}">
+                                {{ item.name }} ({{ item.code }})
+                            </span>
+                            <strong>{{ item.value }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        const convertForm = document.getElementById('convertForm');
+        const baseSelect = document.getElementById('baseSelect');
+        const targetSelect = document.getElementById('targetSelect');
+        const amountInput = document.getElementById('amountInput');
+        const baseFlag = document.getElementById('baseFlag');
+        const targetFlag = document.getElementById('targetFlag');
+
+        function handleSelectChange(selectEl, imgEl) {
+            const flagCode = selectEl.options[selectEl.selectedIndex].dataset.flag;
+            imgEl.src = `https://flagcdn.com${flagCode}.png`;
+            convertForm.submit();
+        }
+
+        baseSelect.addEventListener('change', () => handleSelectChange(baseSelect, baseFlag));
+        targetSelect.addEventListener('change', () => handleSelectChange(targetSelect, targetFlag));
+        amountInput.addEventListener('change', () => convertForm.submit());
+
+        function swapCurrencies() {
+            const temp = baseSelect.value;
+            baseSelect.value = targetSelect.value;
+            targetSelect.value = temp;
+            convertForm.submit();
+        }
+    </script>
+</body>
+</html> -->
+

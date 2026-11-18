@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HKO 9-Day Forecast</title>
+    <style>
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Hong Kong Observatory 9-Day Forecast</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Day of Week</th>
+                <th>Forecast Detail</th>
+                <th>Temp High</th>
+                <th>Temp Low</th>
+                <th>Icon</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.week }}</td>
+                <td>{{ row.weather }}</td>
+                <td>{{ row.max_temp }}°C</td>
+                <td>{{ row.min_temp }}°C</td>
+                <td>
+                    <!-- Icon code displayed as text; replace with image URL if needed -->
+                    {% if row.icon %}
+        <img src="https://www.hko.gov.hk/images/HKOWxIconOutline/pic{{ row.icon }}.png"
+             alt="weather icon {{ row.icon }}"
+             width="50" height="50">
+    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

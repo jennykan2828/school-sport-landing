@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>香港九天天氣預報</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>香港九天天氣預報</h1>
+        <p>資料來源：香港天文台（HKO）</p>
+      </header>
+
+      <div class="grid">
+        {% for day in days %}
+        <div class="weather-card">
+          <div class="date-row">
+            <div class="date">{{ day.date }}</div>
+            <div class="week">{{ day.week }}</div>
+          </div>
+          <div class="temp">
+            {{ day.min_temp }}° – {{ day.max_temp }}° <span>C</span>
+          </div>
+          <div class="weather">{{ day.weather }}</div>
+          <div class="meta">
+            <span class="psr">降雨概率：{{ day.psr }}</span>
+            <span class="action {{ 'good' if day.suitable else 'bad' }}">
+              {{ day.action }}
+            </span>
+            <span class="icon"
+              ><img
+                src="https://www.hko.gov.hk/images/HKOWxIconOutline/pic{{ day.icon }}.png"
+                alt="{{ day.weather }}"
+                width="40"
+                height="40"
+            /></span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
