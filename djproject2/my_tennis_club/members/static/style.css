@@ -1,4 +1,10 @@
 body {
-  background-color: gold;
+  min-height: 100vh; /* 100% of the screen height */
+  margin: 0;
+  background-image: url("menu-bg.jpg");
+  background-size: cover; /* makes the image cover the whole area */
+  background-repeat: no-repeat; /* prevents repeating */
+  background-position: center; /* centers the image (recommended) */
   font-size: 30px;
+  color: white;
 }

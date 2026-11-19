@@ -5,4 +5,6 @@ from django.template import loader
 
 def members(request):
     template = loader.get_template("myfirst.html")
-    return HttpResponse(template.render())
+    context = {"programming": "python"}
+    # return HttpResponse(template.render())
+    return render(request, "myfirst.html", context)
