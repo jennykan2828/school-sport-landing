@@ -1,0 +1,32 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}My Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" href="{% static 'home/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'student/style.css' %}" />
+  </head>
+  <body>
+    <!-- Header / Navbar -->
+    <header>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/product/">Product</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+        <a href="/student/">Student</a>
+      </nav>
+    </header>
+
+    <!-- Main Content (this part changes on every page) -->
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <!-- <footer>
+      <p>&copy; 2026 My Team Website</p>
+    </footer> -->
+  </body>
+</html>

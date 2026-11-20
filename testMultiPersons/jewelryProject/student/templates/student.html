@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Student - My Website{% endblock %}
+
+{% block content %}
+  <h1 class="home-page"><a href="/student/details">Student!</a></h1>
+  <h1>Student List</h1>
+
+  {% if students %}
+    <ul>
+      {% for student in students %}
+        <li>
+          <a href="/student/details/{{ student.student_id }}/"
+            >{{ student.first_name }}
+            {{ student.last_name }}</a
+          >
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No students found.</p>
+  {% endif %}
+
+  <p>Welcome to my first {{ programming }} project!</p>
+{% endblock %}

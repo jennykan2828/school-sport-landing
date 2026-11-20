@@ -1,0 +1,6 @@
+body {
+  min-height: 100vh; /* 100% of the screen height */
+  margin: 0;
+  font-size: 30px;
+  color: gold;
+}
